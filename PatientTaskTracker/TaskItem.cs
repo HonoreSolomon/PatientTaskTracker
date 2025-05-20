@@ -2,7 +2,7 @@
 
 namespace PatientTaskTracker
 {
-    public class Task
+    public class TaskItem
     {
         private static int _nextTaskId = 1;
         private int _taskId;
@@ -10,7 +10,8 @@ namespace PatientTaskTracker
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
 
-        public int TaskId         {
+        public int TaskId
+        {
             get { return _taskId; }
             private set { _taskId = value; }
         }
@@ -18,11 +19,11 @@ namespace PatientTaskTracker
 
         public bool IsCompleted { get; set; } = false;
 
-        public Task(int patientID, string description, DateTime DueDate)
+        public TaskItem(int patientID, string description, DateTime dueDate)
         {
             PatientId = patientID;
             Description = description;
-            DueDate = DueDate;
+            DueDate = dueDate;
 
             Created = DateTime.Now;
             TaskId = _nextTaskId++;

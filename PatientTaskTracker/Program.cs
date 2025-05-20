@@ -1,7 +1,7 @@
 ﻿namespace PatientTaskTracker
 
 {
-    
+
     public class Program
     {
         public static void Main(string[] args)
@@ -13,7 +13,7 @@
             while (true)
             {
 
-                
+
                 Console.WriteLine("Please choose on of the following options. \n");
                 Console.WriteLine("1. Add a new patient. ");
                 Console.WriteLine("2. List Current patients.");
@@ -21,10 +21,11 @@
                 Console.WriteLine("4. Remove a patient. ");
                 Console.WriteLine("5. Add a new task. ");
                 Console.WriteLine("6. List current tasks. ");
-                Console.WriteLine("7. Edit a task. ");
-                Console.WriteLine("8. Remove a task ");
-                Console.WriteLine("9. Mark task complete. ");
-                Console.WriteLine("10. Exit.\n");
+                Console.WriteLine("7  List tasks for patient ");
+                Console.WriteLine("8. Edit a task. ");
+                Console.WriteLine("9. Remove a task ");
+                Console.WriteLine("10. Mark task complete. ");
+                Console.WriteLine("11. Exit.\n");
                 var input = Console.ReadLine().Trim();
                 switch (input)
                 {
@@ -56,7 +57,7 @@
                         int patientId;
                         while (!int.TryParse(Console.ReadLine().Trim(), out patientId))
                         {
-                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
+                            Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
                         if (!patientManager.PatientExists(patientId))
@@ -96,7 +97,7 @@
 
                         }
 
-                        
+
                         Console.WriteLine("Patient removed.");
                         break;
 
@@ -127,12 +128,12 @@
                             Console.WriteLine("Invalid input. Please enter a valid Due Date: ");
                         }
 
-                        
+
                         taskManager.AddTask(taskPatientId, taskDescription, taskDueDate);
                         Console.WriteLine("Task added.");
 
                         break;
-                        
+
 
                     case ("6"):
 
@@ -156,6 +157,37 @@
                         break;
 
                     case ("7"):
+
+                        Console.WriteLine("Please enter the patient Id: ");
+                        int patientIdForTasks;
+
+                        while (!int.TryParse(Console.ReadLine().Trim(), out patientIdForTasks))
+                        {
+                            Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
+                        }
+
+                        if (!patientManager.PatientExists(patientIdForTasks))
+                        {
+                            Console.WriteLine("Patient not found.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+
+
+                        var tasksForPatient = taskManager.GetTasksByPatientId(patientIdForTasks);
+                        foreach (var task in tasksForPatient)
+                        {
+                            Console.WriteLine($"TaskId: {task.TaskId}, PatientID: {task.PatientId}, Task Description: {task.Description}, Due Date: {task.DueDate}, Created On: {task.Created} Completed: {task.IsCompleted}");
+                        }
+
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+
+                        break;
+
+
+                    case ("8"):
                         Console.WriteLine("Please enter task ID to edit: ");
                         int taskChoice;
                         while (!int.TryParse(Console.ReadLine().Trim(), out taskChoice))
@@ -203,16 +235,16 @@
 
                         break;
 
-                    case ("8"):
+                    case ("9"):
                         Console.WriteLine("Please enter a taskID to delete: ");
                         int taskIdToRemove;
                         while (!int.TryParse(Console.ReadLine().Trim(), out taskIdToRemove))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
-                        }                     
-   
+                        }
 
-                        if(taskManager.RemoveTask(taskIdToRemove))
+
+                        if (taskManager.RemoveTask(taskIdToRemove))
                         {
                             Console.WriteLine("Task removed.");
                         }
@@ -226,7 +258,7 @@
 
                         break;
 
-                    case ("9"):
+                    case ("10"):
                         Console.WriteLine("Please enter taskID to complete: ");
                         int taskIdToComplete;
                         while (!int.TryParse(Console.ReadLine().Trim(), out taskIdToComplete))
@@ -234,7 +266,7 @@
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
-                        if(taskManager.MarkTaskAsCompleted(taskIdToComplete))
+                        if (taskManager.MarkTaskAsCompleted(taskIdToComplete))
                         {
                             Console.WriteLine("Task marked as complete.");
                         }
@@ -248,7 +280,7 @@
 
                         break;
 
-                    case ("10"):
+                    case ("11"):
                         Console.WriteLine("Exiting the application. Goodbye!");
                         return;
 

@@ -11,8 +11,8 @@ namespace PatientTaskTracker
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int PatientId 
-        { 
+        public int PatientId
+        {
             get { return _patientId; }
             private set { _patientId = value; }
 
@@ -28,7 +28,7 @@ namespace PatientTaskTracker
 
 
 
-        
+
 
 
 
