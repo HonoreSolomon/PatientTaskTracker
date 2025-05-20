@@ -144,6 +144,7 @@
                             Console.ReadKey();
                             break;
                         }
+
                         foreach (var task in tasks)
                         {
                             Console.WriteLine($"TaskId: {task.TaskId}, PatientID: {task.PatientId}, Task Description: {task.Description}, Due Date: {task.DueDate}, Created On: {task.Created} Completed: {task.IsCompleted}");
@@ -167,6 +168,14 @@
                         while (!int.TryParse(Console.ReadLine().Trim(), out newPatientId))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
+                        }
+
+                        if (!patientManager.PatientExists(newPatientId))
+                        {
+                            Console.WriteLine("Patient not found.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
                         }
 
                         Console.WriteLine("Please enter new task description: ");

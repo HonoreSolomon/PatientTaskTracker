@@ -13,7 +13,8 @@ namespace PatientTaskTracker
 
         public void AddTask(int patientId, string description, DateTime DueDate)
         {
-            _tasks.Add(new Task(patientId, description, DueDate));
+            var task = new Task(patientId, description, DueDate);
+            _tasks.Add(task);
 
         }
 
