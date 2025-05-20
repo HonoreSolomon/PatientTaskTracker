@@ -5,8 +5,33 @@ namespace PatientTaskTracker
     public class Patient
     {
 
-        public int PatientId { get; set; }
+        private static int _nextPatientId = 1;
+
+        private int _patientId;
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public int PatientId 
+        { 
+            get { return _patientId; }
+            private set { _patientId = value; }
+
+        }
+
+
+        public Patient(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PatientId = _nextPatientId++;
+        }
+
+
+
+        
+
+
+
+
     }
 }
