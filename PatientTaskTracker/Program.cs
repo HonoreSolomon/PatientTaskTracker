@@ -7,8 +7,8 @@
         public static void Main(string[] args)
         {
             PatientManager patientManager = new PatientManager();
-            List<Task> tasks = new List<Task>();
-            
+            TaskManager taskManager = new TaskManager();
+
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
             {
@@ -116,7 +116,6 @@
                             break;
                         }
 
-                        int taskId = tasks.Count + 1;
 
                         Console.WriteLine("Please enter the task description: ");
                         string taskDescription = Console.ReadLine();
@@ -128,13 +127,24 @@
                             Console.WriteLine("Invalid input. Please enter a valid Due Date: ");
                         }
 
-                        tasks.Add(new Task(taskPatientId, taskDescription, taskDueDate ));
+                        
+                        taskManager.AddTask(taskPatientId, taskDescription, taskDueDate);
                         Console.WriteLine("Task added.");
 
                         break;
                         
 
                     case ("6"):
+
+                        var tasks = taskManager.GetAllTasks();
+                        if (tasks.Count() == 0)
+                        {
+                            Console.WriteLine("No tasks found.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
+
                         foreach (var task in tasks)
                         {
                             Console.WriteLine($"TaskId: {task.TaskId}, PatientID: {task.PatientId}, Task Description: {task.Description}, Due Date: {task.DueDate}, Created On: {task.Created} Completed: {task.IsCompleted}");
@@ -151,16 +161,6 @@
                         while (!int.TryParse(Console.ReadLine().Trim(), out taskChoice))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
-                        }
-
-                        var taskToEdit = tasks.Find(task => task.TaskId == taskChoice);
-                        if (taskToEdit == null)
-                        {
-                            Console.WriteLine("Task not found.");
-                            Console.WriteLine("Press any key to continue...");
-                            Console.ReadKey();
-                            break;
-                            //throw new ArgumentNullException(nameof(taskToEdit), "Task not found.");
                         }
 
                         Console.WriteLine("Please enter new patient Id: ");
@@ -188,10 +188,18 @@
                             Console.WriteLine("Invalid input. Please enter a valid Due Date: ");
                         }
 
+                        if (taskManager.EditTask(taskChoice, newPatientId, newTaskDescription, newTaskDueDate))
+                        {
+                            Console.WriteLine("Task updated.");
+                        }
 
-                        taskToEdit.PatientId = newPatientId;
-                        taskToEdit.Description = newTaskDescription;
-                        taskToEdit.DueDate = newTaskDueDate;
+                        else
+                        {
+                            Console.WriteLine("Task not found.");
+                            Console.WriteLine("Press any key to continue...");
+                            Console.ReadKey();
+                            break;
+                        }
 
                         break;
 
@@ -201,20 +209,20 @@
                         while (!int.TryParse(Console.ReadLine().Trim(), out taskIdToRemove))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
+                        }                     
+   
+
+                        if(taskManager.RemoveTask(taskIdToRemove))
+                        {
+                            Console.WriteLine("Task removed.");
                         }
-                       
-                        var taskToRemove = tasks.Find(task => task.TaskId == taskIdToRemove);
-                        if (taskToRemove == null)
+                        else
                         {
                             Console.WriteLine("Task not found.");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             break;
-                            //throw new ArgumentNullException(nameof(taskToRemove), "Task not found.");
                         }
-
-                        tasks.Remove(taskToRemove);
-                        Console.WriteLine("Task removed.");
 
                         break;
 
@@ -226,19 +234,17 @@
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
-                        var taskToComplete = tasks.Find(task => task.TaskId == taskIdToComplete);
-                        if (taskToComplete == null)
+                        if(taskManager.MarkTaskAsCompleted(taskIdToComplete))
+                        {
+                            Console.WriteLine("Task marked as complete.");
+                        }
+                        else
                         {
                             Console.WriteLine("Task not found.");
                             Console.WriteLine("Press any key to continue...");
                             Console.ReadKey();
                             break;
-                            //throw new ArgumentNullException(nameof(taskToComplete), "Task not found.");
                         }
-
-                        taskToComplete.IsCompleted = true;
-
-                        Console.WriteLine("Task marked as complete.");
 
                         break;
 

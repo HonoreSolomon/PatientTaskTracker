@@ -20,6 +20,10 @@ namespace PatientTaskTracker
 
         public Task(int patientID, string description, DateTime DueDate)
         {
+            PatientId = patientID;
+            Description = description;
+            DueDate = DueDate;
+
             Created = DateTime.Now;
             TaskId = _nextTaskId++;
             IsCompleted = false;

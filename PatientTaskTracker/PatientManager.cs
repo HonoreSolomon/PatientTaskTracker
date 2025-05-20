@@ -23,7 +23,7 @@ namespace PatientTaskTracker
         {
             var patient = new Patient(firstName, lastName);
             _patients.Add(patient);
-            Console.WriteLine($"Patient {firstName} {lastName} added with ID {patient.PatientId}.");
+            
         }
         public IEnumerable<Patient> GetAllPatients()
         {
