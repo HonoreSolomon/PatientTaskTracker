@@ -40,8 +40,12 @@
                         break;
 
                     case ("2"):
-                        patientManager.ListPatients();
-                        foreach (var patient in patientManager)
+                        var patientList = patientManager.GetAllPatients();
+                        foreach (var patient in patientList)
+                        {
+                            Console.WriteLine($"Patient ID: {patient.PatientId}, Name: {patient.FirstName} {patient.LastName}");
+                        }
+
                         Console.WriteLine("Press any key to continue...");
                         Console.ReadKey();
 
@@ -55,13 +59,7 @@
                              Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
-
-                        Console.WriteLine("Please enter new first name: ");
-                        string newFirstName = Console.ReadLine().Trim();
-                        Console.WriteLine("Please enter new last name: ");
-                        string newLastName = Console.ReadLine().Trim();
-
-                        if (patientManager.EditPatient(patientId, newFirstName, newLastName))
+                        if (!patientManager.PatientExists(patientId))
                         {
                             Console.WriteLine("Patient not found.");
                             Console.WriteLine("Press any key to continue...");
@@ -69,8 +67,14 @@
                             break;
                         }
 
+                        Console.WriteLine("Please enter new first name: ");
+                        string newFirstName = Console.ReadLine().Trim();
+                        Console.WriteLine("Please enter new last name: ");
+                        string newLastName = Console.ReadLine().Trim();
 
 
+
+                        patientManager.EditPatient(patientId, newFirstName, newLastName);
                         Console.WriteLine("Patient info updated.");
                         break;
 
@@ -98,13 +102,13 @@
 
                     case ("5"):
                         Console.WriteLine("Please enter the patient Id: ");
-                        int patientId;
-                        while (!int.TryParse(Console.ReadLine().Trim(), out patientId))
+                        int taskPatientId;
+                        while (!int.TryParse(Console.ReadLine().Trim(), out taskPatientId))
                         {
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
-                        if (!patientManager.Exists(patient => patient.PatientId == patientId))
+                        if (!patientManager.PatientExists(taskPatientId))
                         {
                             Console.WriteLine("Patient not found.");
                             Console.WriteLine("Press any key to continue...");
@@ -124,7 +128,7 @@
                             Console.WriteLine("Invalid input. Please enter a valid Due Date: ");
                         }
 
-                        tasks.Add(new Task(patientId, taskDescription, taskDueDate ));
+                        tasks.Add(new Task(taskPatientId, taskDescription, taskDueDate ));
                         Console.WriteLine("Task added.");
 
                         break;
@@ -166,7 +170,7 @@
                             Console.WriteLine("Invalid input. Please enter a valid patient ID: ");
                         }
 
-                        if (!patientManager.Exists(patient => patient.PatientId == newPatientId))
+                        if (!patientManager.PatientExists(newPatientId))
                         {
                             Console.WriteLine("Patient not found.");
                             Console.WriteLine("Press any key to continue...");

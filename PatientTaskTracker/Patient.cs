@@ -28,16 +28,7 @@ namespace PatientTaskTracker
 
 
 
-        private (string, string) GetPatientInfo()
-        {
-            Console.WriteLine("Please enter patient first name: ");
-            string firstName = Console.ReadLine().Trim();
-
-            Console.WriteLine("Please enter patient last name: ");
-            string lastName = Console.ReadLine().Trim();
-
-            return (firstName, lastName);
-        }
+        
 
 
 
