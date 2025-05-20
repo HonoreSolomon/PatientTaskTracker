@@ -1,24 +1,24 @@
-﻿using System.Threading.Tasks;
+﻿
 
 namespace PatientTaskTracker
 {
     public class TaskManager
     {
-        private List<Task> _tasks = new List<Task>();
+        private List<TaskItem> _tasks = new List<TaskItem>();
 
-        private Task FindTaskById(int taskId)
+        private TaskItem FindTaskById(int taskId)
         {
             return _tasks.Find(task => task.TaskId == taskId);
         }
 
         public void AddTask(int patientId, string description, DateTime DueDate)
         {
-            var task = new Task(patientId, description, DueDate);
+            var task = new TaskItem(patientId, description, DueDate);
             _tasks.Add(task);
 
         }
 
-        public IEnumerable<Task> GetAllTasks()
+        public IEnumerable<TaskItem> GetAllTasks()
 {
             return _tasks.AsReadOnly();
         }
@@ -66,6 +66,11 @@ namespace PatientTaskTracker
             }
             taskToComplete.IsCompleted = true;
             return true;
+        }
+
+        public IEnumerable<TaskItem> GetTasksByPatientId(int patientId)
+        {
+            return _tasks.Where(task => task.PatientId == patientId).ToList();
         }
 
 
