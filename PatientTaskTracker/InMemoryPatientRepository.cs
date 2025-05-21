@@ -4,6 +4,11 @@
     {
         private readonly List<Patient> _patients = new List<Patient>();
 
+        private bool PatientExists(Patient patient)
+        {
+            return _patients.Exists(p => p.PatientId == patient.PatientId);
+        }
+        
         public void AddPatient(Patient patient)
         {             
             _patients.Add(patient);
@@ -19,36 +24,29 @@
         {
             return _patients.Find(patient => patient.PatientId == patientId);
         }
+
         public bool UpdatePatient(Patient updatedPatient)
         {
-            Patient? existingPatient;
-            (bool flowControl, bool value) = patientExists(updatedPatient, out existingPatient);
-            if (!flowControl)
+            if (!PatientExists(updatedPatient))
             {
-                return value;
+                return false;
             }
+            
+            var existingPatient = GetPatientById(updatedPatient.PatientId);
 
             existingPatient.FirstName = updatedPatient.FirstName;
             existingPatient.LastName = updatedPatient.LastName;
             return true;
 
         }
-
-        private (bool flowControl, bool value) patientExists(Patient updatedPatient, out Patient? existingPatient)
-        {
-            existingPatient = _patients.Find(patient => patient.PatientId == updatedPatient.PatientId);
-            if (existingPatient == null)
-            {
-                return (flowControl: false, value: false);
-            }
-
-            return (flowControl: true, value: default);
-        }
-
         public bool RemovePatient(Patient patient)
         {
-            
+            if (!PatientExists(patient))
+            {
+                return false;
+            }
             _patients.Remove(patient);
+            return true;
         }
 
     }
