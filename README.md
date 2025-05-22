@@ -10,8 +10,12 @@ A simple C# console application to manage patients and their associated tasks. T
 - **Add, list, edit, and remove tasks**
 - **Assign tasks to patients**
 - **Mark tasks as complete**
+- **View tasks by patient**
 - **Input validation for IDs and dates**
 - **Auto-incrementing unique IDs for patients and tasks**
+- **In-memory data storage**
+- **In depth xUnit unit tests for business logic and CRUD operations**
+- 
 
 ---
 
@@ -33,6 +37,31 @@ A simple C# console application to manage patients and their associated tasks. T
 1. Clone the repository:
 
 2. Build and run:
+dotnet build
+dotnet run --project PatientTaskTracker
+
+
+---
+
+##Usage
+-Follow the numbered menu to add, list, edit, or remove patients and tasks.
+-All data is stored in memory for this version (data is not persisted after exit).
+-Input is validated for IDs and dates; descriptive errors are shown for invalid input.
+
+---
+
+##Architecture
+-Domain Models: Patient, TaskItem (auto-incrementing IDs, data-only)
+-Repositories: In-memory implementations for IPatientRepository and ITaskRepository
+-Managers: PatientManager and TaskManager handle business logic and validation
+-CLI: Menu-driven user interface in Program.cs
+-Testing: xUnit tests for all core CRUD operations
+
+---
+
+##Testing
+-Unit Tests are implemented with xUnit
+-Open Tests withing Visual Studio in test explorer
 
 ---
 
@@ -41,7 +70,6 @@ A simple C# console application to manage patients and their associated tasks. T
 - Add data persistence (save/load to file or database)
 - Implement a web or GUI interface
 - Add user authentication and permissions
-- Unit tests for manager classes
 - CI/CD integration with GitHub Actions
 
 ---
