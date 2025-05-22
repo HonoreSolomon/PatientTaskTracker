@@ -43,14 +43,14 @@ dotnet run --project PatientTaskTracker
 
 ---
 
-##Usage
+## Usage
 -Follow the numbered menu to add, list, edit, or remove patients and tasks.
 -All data is stored in memory for this version (data is not persisted after exit).
 -Input is validated for IDs and dates; descriptive errors are shown for invalid input.
 
 ---
 
-##Architecture
+## Architecture
 -Domain Models: Patient, TaskItem (auto-incrementing IDs, data-only)
 -Repositories: In-memory implementations for IPatientRepository and ITaskRepository
 -Managers: PatientManager and TaskManager handle business logic and validation
@@ -59,7 +59,7 @@ dotnet run --project PatientTaskTracker
 
 ---
 
-##Testing
+## Testing
 -Unit Tests are implemented with xUnit
 -Open Tests withing Visual Studio in test explorer
 
