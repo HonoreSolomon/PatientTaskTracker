@@ -22,6 +22,7 @@
 
         public Patient GetPatientById(int patientId)
         {
+            // Checking if patient exists in the PatientManager class
             return _patients.Find(patient => patient.PatientId == patientId);
         }
 

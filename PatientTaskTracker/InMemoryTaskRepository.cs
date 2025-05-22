@@ -2,7 +2,7 @@
 
 namespace PatientTaskTracker
 {
-    internal class InMemoryTaskRepository : ITaskRepository
+    public class InMemoryTaskRepository : ITaskRepository
     {
 
         private readonly List<TaskItem> _tasks = new List<TaskItem>();
@@ -69,5 +69,6 @@ namespace PatientTaskTracker
             taskToComplete.IsCompleted = true;
             return true;
         }
+
     }
 }
