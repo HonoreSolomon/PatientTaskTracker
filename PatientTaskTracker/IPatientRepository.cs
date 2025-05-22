@@ -1,13 +1,13 @@
 ﻿namespace PatientTaskTracker
 {
-    interface IPatientRepository
+    public interface IPatientRepository
     {
-        void AddPatient(Patient patient);
-        IEnumerable<Patient> GetAllPatients();
-        bool UpdatePatient(Patient patient);
-        bool RemovePatient(Patient patient);
+        public void AddPatient(Patient patient);
+        public IEnumerable<Patient> GetAllPatients();
+        public bool UpdatePatient(Patient patient);
+        public bool RemovePatient(Patient patient);
         //public bool PatientExists(int patientId);
-        Patient GetPatientById(int patientId);
+        public Patient GetPatientById(int patientId);
 
     }
 }

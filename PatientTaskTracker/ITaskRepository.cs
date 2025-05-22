@@ -1,16 +1,16 @@
 ﻿namespace PatientTaskTracker
 {
-    interface ITaskRepository
+    public interface ITaskRepository
     {
         
-            void AddTask(TaskItem task);
-            IEnumerable<TaskItem> GetAllTasks();
-            bool UpdateTask(TaskItem task);
-            bool RemoveTask(TaskItem task);
+            public void AddTask(TaskItem task);
+            public IEnumerable<TaskItem> GetAllTasks();
+            public bool UpdateTask(TaskItem task);
+            public bool RemoveTask(TaskItem task);
             //public bool PatientExists(int patientId);
-            TaskItem GetTaskById(int taskId);
+            public TaskItem GetTaskById(int taskId);
 
-            IEnumerable<TaskItem> GetTasksByPatientId(int patientId);
+            public IEnumerable<TaskItem> GetTasksByPatientId(int patientId);
 
     }
 
