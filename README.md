@@ -40,14 +40,6 @@ A simple C# console application to manage patients and their associated tasks. T
 dotnet build
 dotnet run --project PatientTaskTracker
 
-
----
-
-## Usage
--Follow the numbered menu to add, list, edit, or remove patients and tasks.
--All data is stored in memory for this version (data is not persisted after exit).
--Input is validated for IDs and dates; descriptive errors are shown for invalid input.
-
 ---
 
 ## Architecture
