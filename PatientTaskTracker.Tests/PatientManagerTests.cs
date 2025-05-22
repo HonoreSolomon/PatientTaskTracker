@@ -7,13 +7,20 @@ namespace PatientTaskTracker.Tests
 {
     public class PatientManagerTests
     {
-        [Fact]
-        public void PatientExists_ShouldReturnTrueIfPatientExists()
+        private PatientManager CreatePatientManagerWithInitialPatient()
         {
             var repo = new InMemoryPatientRepository();
             var manager = new PatientManager(repo);
 
             manager.AddPatient("John", "Doe");
+            return manager;
+        }
+
+
+        [Fact]
+        public void PatientExists_ShouldReturnTrueIfPatientExists()
+        {
+            PatientManager manager = CreatePatientManagerWithInitialPatient();
             manager.AddPatient("Jane", "Smith");
             manager.AddPatient("Bob", "Brown");
 
@@ -21,16 +28,13 @@ namespace PatientTaskTracker.Tests
 
             Assert.True(result);
 
-
+            
         }
 
         [Fact]
         public void PatientExists_ShouldReturnFalseIfPatientDoesNotExist()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
             manager.AddPatient("Jane", "Smith");
             manager.AddPatient("Bob", "Brown");
 
@@ -41,11 +45,7 @@ namespace PatientTaskTracker.Tests
         [Fact]
         public void AddPatient_ShouldAddPatientToRepository()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-
-
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
             var patients = manager.GetAllPatients();
 
             Assert.Single(patients);
@@ -59,10 +59,7 @@ namespace PatientTaskTracker.Tests
         [Fact]
         public void GetAllPatients_ShouldReturnAllPatients()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
             manager.AddPatient("Jane", "Smith");
             manager.AddPatient("Bob", "Brown");
 
@@ -75,10 +72,7 @@ namespace PatientTaskTracker.Tests
 
         public void EditPatient_ShouldUpdatePatientDetails()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
             var patient = manager.GetAllPatients().First();
 
             bool result = manager.EditPatient(patient.PatientId, "Jane", "Smith");
@@ -93,10 +87,7 @@ namespace PatientTaskTracker.Tests
         [Fact]
         public void EditPatient_ShouldReturnFalseIfPatientDoesNotExist()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
             var patient = manager.GetAllPatients().First();
 
             bool result = manager.EditPatient(999, "Jane", "Smith");
@@ -108,10 +99,8 @@ namespace PatientTaskTracker.Tests
         [Fact]
         public void RemovePatient_ShouldRemovePatientFromRepository()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
+            var manager = CreatePatientManagerWithInitialPatient();
 
-            manager.AddPatient("John", "Doe");
             var patient = manager.GetAllPatients().First();
             bool result = manager.RemovePatient(patient.PatientId);
             
@@ -124,9 +113,7 @@ namespace PatientTaskTracker.Tests
         [Fact]
         public void RemovePatient_ShouldReturnFalseIfPatientDoesNotExist()
         {
-            var repo = new InMemoryPatientRepository();
-            var manager = new PatientManager(repo);
-            manager.AddPatient("John", "Doe");
+            var manager = CreatePatientManagerWithInitialPatient();
 
             bool result = manager.RemovePatient(999);
 
