@@ -4,7 +4,7 @@ namespace PatientTaskTracker
 {
     public class TaskManager
     {
-        private ITaskRepository _taskRepository;
+        private readonly ITaskRepository _taskRepository;
 
         public TaskManager(ITaskRepository taskRepository)
         {
