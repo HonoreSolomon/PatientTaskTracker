@@ -4,34 +4,40 @@ namespace PatientTaskTracker
 {
     public class TaskManager
     {
-        private List<TaskItem> _tasks = new List<TaskItem>();
+        private ITaskRepository _taskRepository;
 
-        private TaskItem FindTaskById(int taskId)
+        public TaskManager(ITaskRepository taskRepository)
         {
-            return _tasks.Find(task => task.TaskId == taskId);
+            _taskRepository = taskRepository;
         }
+
+        //private TaskItem FindTaskById(int taskId)
+        //{
+        //    return _tasks.Find(task => task.TaskId == taskId);
+        //}
 
         public void AddTask(int patientId, string description, DateTime DueDate)
         {
+            //Not checking for duplicates here
             var task = new TaskItem(patientId, description, DueDate);
-            _tasks.Add(task);
+            _taskRepository.AddTask(task);
 
+        }
+        public bool TaskExists(int taskId)
+        {
+            return _taskRepository.GetTaskById(taskId) != null;
         }
 
         public IEnumerable<TaskItem> GetAllTasks()
 {
-            return _tasks.AsReadOnly();
+            return _taskRepository.GetAllTasks();
         }
 
         
-        public bool TaskExists(int taskId)
-        {
-            return FindTaskById(taskId) != null;
-        }
 
         public bool EditTask(int taskId, int newPatientID, string newDescription, DateTime newDueDate)
         {
-            var taskToEdit = FindTaskById(taskId);
+            var taskToEdit = _taskRepository.GetTaskById(taskId);
 
             if (taskToEdit == null) {
                 return false;
@@ -47,19 +53,19 @@ namespace PatientTaskTracker
 
         public bool RemoveTask(int taskId)
         {
-            var taskToRemove = FindTaskById(taskId);
+            var taskToRemove = _taskRepository.GetTaskById(taskId);
             if (taskToRemove == null)
             {
                 return false;
             }
 
-            _tasks.Remove(taskToRemove);
+            _taskRepository.RemoveTask(taskToRemove);
             return true;
         }
 
         public bool MarkTaskAsCompleted(int taskId)
         {
-            var taskToComplete = FindTaskById(taskId);
+            var taskToComplete = _taskRepository.GetTaskById(taskId);
             if (taskToComplete == null)
             {
                 return false;
@@ -70,7 +76,7 @@ namespace PatientTaskTracker
 
         public IEnumerable<TaskItem> GetTasksByPatientId(int patientId)
         {
-            return _tasks.Where(task => task.PatientId == patientId).ToList();
+            return _taskRepository.GetTasksByPatientId(patientId);
         }
 
 

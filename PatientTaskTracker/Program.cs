@@ -6,8 +6,10 @@
     {
         public static void Main(string[] args)
         {
-            PatientManager patientManager = new PatientManager();
-            TaskManager taskManager = new TaskManager();
+            InMemoryPatientRepository inMemoryPatientRepository = new();
+            InMemoryTaskRepository inMemoryTaskRepository = new();
+            PatientManager patientManager = new(inMemoryPatientRepository);
+            TaskManager taskManager = new(inMemoryTaskRepository);
 
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
