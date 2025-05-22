@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PatientTaskTracker
+﻿namespace PatientTaskTracker
 {
-    internal interface ITaskRepository
+    interface ITaskRepository
     {
+        
+            void AddTask(TaskItem task);
+            IEnumerable<TaskItem> GetAllTasks();
+            bool UpdateTask(TaskItem task);
+            bool RemoveTask(TaskItem task);
+            //public bool PatientExists(int patientId);
+            TaskItem GetTaskById(int taskId);
+
+            IEnumerable<TaskItem> GetTasksByPatientId(int patientId);
+
     }
+
 }
+
+
