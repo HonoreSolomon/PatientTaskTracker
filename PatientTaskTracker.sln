@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientTaskTracker", "PatientTaskTracker\PatientTaskTracker.csproj", "{5681C53D-5F46-401E-A02A-52FB3E84844D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientTaskTracker.Tests", "PatientTaskTracker.Tests\PatientTaskTracker.Tests.csproj", "{A043BA65-8FEF-4386-B6D3-6511633DBD4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5681C53D-5F46-401E-A02A-52FB3E84844D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5681C53D-5F46-401E-A02A-52FB3E84844D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5681C53D-5F46-401E-A02A-52FB3E84844D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A043BA65-8FEF-4386-B6D3-6511633DBD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A043BA65-8FEF-4386-B6D3-6511633DBD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A043BA65-8FEF-4386-B6D3-6511633DBD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A043BA65-8FEF-4386-B6D3-6511633DBD4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

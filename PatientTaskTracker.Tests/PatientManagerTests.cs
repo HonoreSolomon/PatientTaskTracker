@@ -46,7 +46,7 @@ namespace PatientTaskTracker.Tests
 
 
             manager.AddPatient("John", "Doe");
-            var patients = repo.GetAllPatients();
+            var patients = manager.GetAllPatients();
 
             Assert.Single(patients);
             var patient = patients.First();
@@ -79,7 +79,7 @@ namespace PatientTaskTracker.Tests
             var manager = new PatientManager(repo);
 
             manager.AddPatient("John", "Doe");
-            var patient = repo.GetAllPatients().First();
+            var patient = manager.GetAllPatients().First();
 
             bool result = manager.EditPatient(patient.PatientId, "Jane", "Smith");
             
@@ -97,7 +97,7 @@ namespace PatientTaskTracker.Tests
             var manager = new PatientManager(repo);
 
             manager.AddPatient("John", "Doe");
-            var patient = repo.GetAllPatients().First();
+            var patient = manager.GetAllPatients().First();
 
             bool result = manager.EditPatient(999, "Jane", "Smith");
             
@@ -112,11 +112,11 @@ namespace PatientTaskTracker.Tests
             var manager = new PatientManager(repo);
 
             manager.AddPatient("John", "Doe");
-            var patient = repo.GetAllPatients().First();
+            var patient = manager.GetAllPatients().First();
             bool result = manager.RemovePatient(patient.PatientId);
             
             Assert.True(result);
-            Assert.Empty(repo.GetAllPatients());
+            Assert.Empty(manager.GetAllPatients());
 
 
 
