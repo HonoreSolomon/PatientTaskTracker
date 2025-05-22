@@ -48,7 +48,8 @@ namespace PatientTaskTracker
             {
                 return false;
             }
-
+            //var updatedPatient = new Patient(newFirstName, newLastName);
+            //_patientRepository.UpdatePatient(updatedPatient);
             patientToEdit.FirstName = newFirstName;
             patientToEdit.LastName = newLastName;
 
