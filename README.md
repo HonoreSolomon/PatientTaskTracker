@@ -25,6 +25,9 @@ A simple C# console application to manage patients and their associated tasks. T
 - Each patient and task has a unique, auto-incremented ID.
 - The app runs in a menu-driven loop in the console, prompting the user for actions and input.
 
+![patient-task-tracker-console](https://github.com/user-attachments/assets/a510f0c4-1c46-4b74-ad4e-3257d6e2ca8d)
+
+
 ---
 
 ## Usage
