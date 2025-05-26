@@ -1,33 +1,30 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace PatientTaskTracker
 {
     public class TaskItem
     {
-        private static int _nextTaskId = 1;
-        private int _taskId;
-        public int PatientId { get; set; }
+
+        //TaskID is Primary key
+        [Key]
+        public int TaskId { get; private set; }
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
 
-        public int TaskId
-        {
-            get { return _taskId; }
-            private set { _taskId = value; }
-        }
         public DateTime Created { get; private set; }
+        public bool IsCompleted { get; set; }
+        // Foreign key to Patient
+        public int PatientId { get; set; }
+        public Patient patient { get; set; }
 
-        public bool IsCompleted { get; set; } = false;
-
-        public TaskItem(int patientID, string description, DateTime dueDate)
+        public TaskItem (int patientId, string description,  DateTime dueDate)
         {
-            PatientId = patientID;
+            PatientId = patientId;
             Description = description;
             DueDate = dueDate;
-
-            Created = DateTime.Now;
-            TaskId = _nextTaskId++;
-            IsCompleted = false;
         }
+
     }
 }
