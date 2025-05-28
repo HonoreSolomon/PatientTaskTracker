@@ -13,6 +13,7 @@
         {             
             _patients.Add(patient);
 
+
         }
 
         public IEnumerable<Patient> GetAllPatients()
@@ -29,7 +30,7 @@
         {
             var updatedPatient = GetPatientById(patientId);
 
-            if (!PatientExists(updatedPatient))
+            if (updatedPatient == null)
             {
                 return false;
             }
@@ -48,7 +49,7 @@
         }
         public bool RemovePatient(Patient patient)
         {
-            if (!PatientExists(patient))
+            if (patient == null)
             {
                 return false;
             }

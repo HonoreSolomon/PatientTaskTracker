@@ -62,5 +62,24 @@ namespace PatientTaskTracker.Tests
             Assert.True(result);
             Assert.Empty(patientRepository.GetAllPatients());
         }
+        [Fact]
+            public void UpdatePatient_ShouldUpdatePatient()
+            {
+                var patientRepository = new InMemoryPatientRepository();
+                var patient = new Patient("John", "Doe");
+                patientRepository.AddPatient(patient);
+                var updatedFirstName = "Jane";
+                var updatedLastName = "Smith";
+
+                var result = patientRepository.UpdatePatient(patient.PatientId, updatedFirstName, updatedLastName);
+                var updatedPatient = patientRepository.GetPatientById(patient.PatientId);
+
+                Assert.True(result);
+                Assert.Equal(updatedFirstName, updatedPatient.FirstName);
+                Assert.Equal(updatedLastName, updatedPatient.LastName);
+
+        }
+
+
+        }
     }
-}

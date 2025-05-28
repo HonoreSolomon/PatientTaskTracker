@@ -33,7 +33,7 @@ namespace PatientTaskTracker
 
         public bool RemoveTask(TaskItem task)
         {
-            if (!TaskExists(task))
+            if (task == null)
             {
                 return false;
             }
@@ -42,26 +42,27 @@ namespace PatientTaskTracker
             return true;
         }
 
-        public bool UpdateTask(TaskItem updatedTask)
+        public bool UpdateTask(int taskId, int patientId, string description, DateTime dueDate)
         {
-            if (!TaskExists(updatedTask))
+            var updatedTask = GetTaskById(taskId);
+            if (updatedTask == null)
             {
                 return false;
             }
 
-            var originalTask = GetTaskById(updatedTask.TaskId);
 
-            originalTask.PatientId = updatedTask.PatientId;
-            originalTask.Description = updatedTask.Description;
-            originalTask.DueDate = updatedTask.DueDate;
+            updatedTask.PatientId = patientId;
+            updatedTask.Description = description;
+            updatedTask.DueDate = dueDate;
 
             return true;
 
         }
 
-        public bool MarkTaskAsCompleted(TaskItem taskToComplete)
+        public bool MarkTaskAsCompleted(int taskId)
         {
-            if (!TaskExists(taskToComplete))
+            var taskToComplete = GetTaskById(taskId);
+            if (taskToComplete == null)
             {
                 return false;
             }
