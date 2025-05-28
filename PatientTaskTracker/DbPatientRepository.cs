@@ -31,9 +31,18 @@ namespace PatientTaskTracker
             return _context.SaveChanges() > 0; 
         }
 
-        public bool UpdatePatient(Patient patient)
+        public bool UpdatePatient(int patientId, string newFirstName, string newLastName )
         {
-            _context.Patients.Update(patient);
+            var patientToUpdate = GetPatientById(patientId);
+            if (patientToUpdate == null)
+            {
+                return false;
+            }
+
+            patientToUpdate.FirstName = newFirstName;
+            patientToUpdate.LastName = newLastName;
+
+            
             return _context.SaveChanges() > 0;
         }
     }

@@ -25,17 +25,24 @@
             return _patients.Find(patient => patient.PatientId == patientId);
         }
 
-        public bool UpdatePatient(Patient updatedPatient)
+        public bool UpdatePatient(int patientId, string newFirstName, string newLastName)
         {
+            var updatedPatient = GetPatientById(patientId);
+
             if (!PatientExists(updatedPatient))
             {
                 return false;
             }
 
-            var existingPatient = GetPatientById(updatedPatient.PatientId);
 
-            existingPatient.FirstName = updatedPatient.FirstName;
-            existingPatient.LastName = updatedPatient.LastName;
+            updatedPatient.FirstName = newFirstName;
+            updatedPatient.LastName = newLastName;
+
+            //var existingPatient = GetPatientById(updatedPatient.PatientId);
+
+            //existingPatient.FirstName = updatedPatient.FirstName;
+            //existingPatient.LastName = updatedPatient.LastName;
+
             return true;
 
         }

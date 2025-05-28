@@ -37,10 +37,19 @@ namespace PatientTaskTracker
             return _context.SaveChanges() > 0;
         }
 
-        public bool UpdateTask(TaskItem task)
+        public bool UpdateTask(int taskId, int patientId, string newDescription, DateTime newDueDate)
         {
-            _context.Tasks.Update(task);
+            var taskToUpdate = GetTaskById(taskId);
+            if (taskToUpdate == null)
+            {
+                return false;
+            }
+
+            taskToUpdate.PatientId = patientId;
+            taskToUpdate.Description = newDescription;
+            taskToUpdate.DueDate = newDueDate;
             return _context.SaveChanges() > 0;
+
         }
     }
 }
