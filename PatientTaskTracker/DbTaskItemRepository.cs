@@ -18,27 +18,29 @@ namespace PatientTaskTracker
 
         public IEnumerable<TaskItem> GetAllTasks()
         {
-            throw new NotImplementedException();
+            return _context.Tasks.ToList().AsReadOnly();
         }
 
         public TaskItem GetTaskById(int taskId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.FirstOrDefault(GetTaskById => GetTaskById.TaskId == taskId);
         }
 
         public IEnumerable<TaskItem> GetTasksByPatientId(int patientId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.Where(getTasksByPatientId => getTasksByPatientId.PatientId == patientId).ToList().AsReadOnly();
         }
 
         public bool RemoveTask(TaskItem task)
         {
-            throw new NotImplementedException();
+            _context.Tasks.Remove(task);
+            return _context.SaveChanges() > 0;
         }
 
         public bool UpdateTask(TaskItem task)
         {
-            throw new NotImplementedException();
+            _context.Tasks.Update(task);
+            return _context.SaveChanges() > 0;
         }
     }
 }
