@@ -3,9 +3,9 @@ namespace PatientTaskTracker
 {
     public class DbTaskItemRepository : ITaskRepository
     {
-        private readonly PatientTaskTrackerDbContext _context;
+        private readonly AppDbContext _context;
 
-            public DbTaskItemRepository(PatientTaskTrackerDbContext context)
+            public DbTaskItemRepository(AppDbContext context)
             {
                 _context = context;
             }
