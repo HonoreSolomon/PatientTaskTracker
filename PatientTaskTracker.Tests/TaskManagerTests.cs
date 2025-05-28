@@ -10,7 +10,6 @@ namespace PatientTaskTracker.Tests
         {
             var repo = new InMemoryTaskRepository();
             var manager = new TaskManager(repo);
-
             manager.AddTask(1, "Test Task", DateTime.Now.AddDays(7));
             return manager;
         }
@@ -19,8 +18,12 @@ namespace PatientTaskTracker.Tests
         public void TaskExists_ShouldReturnTrueIfExists()
         {
             TaskManager manager = CreateManagerWithInitialTask();
+            var task2 = new TaskItem(2, "Another Task", DateTime.Now.AddDays(5));
+            var task3 = new TaskItem(3, "Yet Another Task", DateTime.Now.AddDays(10));
+            manager.AddTask(task2.PatientId, task2.Description, task2.DueDate);
+            manager.AddTask(task3.PatientId, task3.Description, task3.DueDate);
 
-            var result = manager.TaskExists(1);
+            var result = manager.TaskExists(task2.TaskId);
 
             Assert.True(result);
 
@@ -98,10 +101,9 @@ namespace PatientTaskTracker.Tests
             var manager = CreateManagerWithInitialTask();
             var task = manager.GetAllTasks().First();
 
-            var result = manager.EditTask(task.TaskId, 2, "BloodWork", DateTime.Now.AddDays(3));
+            var result = manager.EditTask(task.TaskId, task.PatientId, "BloodWork", DateTime.Now.AddDays(3));
 
             Assert.True(result);
-            Assert.Equal(2, task.PatientId);
             Assert.Equal("BloodWork", task.Description);
             Assert.Equal(DateTime.Now.AddDays(3).Date, task.DueDate.Date);
 

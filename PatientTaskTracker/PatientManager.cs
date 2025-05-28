@@ -42,18 +42,18 @@ namespace PatientTaskTracker
 
         public bool EditPatient(int patientId, string newFirstName, string newLastName)
         {
-            var patientToEdit = _patientRepository.GetPatientById(patientId);
+            //var patientToEdit = _patientRepository.GetPatientById(patientId);
 
-            if (patientToEdit == null)
-            {
-                return false;
-            }
+            //if (patientToEdit == null)
+            //{
+            //    return false;
+            //}
             //var updatedPatient = new Patient(newFirstName, newLastName);
-            //_patientRepository.UpdatePatient(updatedPatient);
-            patientToEdit.FirstName = newFirstName;
-            patientToEdit.LastName = newLastName;
+            
+            return _patientRepository.UpdatePatient(patientId, newFirstName, newLastName);
+            
 
-            return true;
+            
         }
 
         public bool RemovePatient(int patientId)

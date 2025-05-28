@@ -1,4 +1,8 @@
-﻿namespace PatientTaskTracker
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace PatientTaskTracker
 
 {
 
@@ -6,6 +10,24 @@
     {
         public static void Main(string[] args)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var configuration = builder.Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseMySql(
+                connectionString,
+                new MySqlServerVersion(new Version(8,4,36))
+            );
+
+
+
+
+
+
+
             InMemoryPatientRepository inMemoryPatientRepository = new();
             InMemoryTaskRepository inMemoryTaskRepository = new();
             PatientManager patientManager = new(inMemoryPatientRepository);
@@ -14,6 +36,7 @@
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
             {
+
 
 
                 Console.WriteLine("Please choose on of the following options. \n");

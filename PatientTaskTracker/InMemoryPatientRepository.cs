@@ -8,10 +8,11 @@
         {
             return _patients.Exists(p => p.PatientId == patient.PatientId);
         }
-        
+
         public void AddPatient(Patient patient)
         {             
             _patients.Add(patient);
+
 
         }
 
@@ -19,30 +20,36 @@
         {
             return _patients.AsReadOnly();
         }
-
         public Patient GetPatientById(int patientId)
         {
             // Checking if patient exists in the PatientManager class
             return _patients.Find(patient => patient.PatientId == patientId);
         }
 
-        public bool UpdatePatient(Patient updatedPatient)
+        public bool UpdatePatient(int patientId, string newFirstName, string newLastName)
         {
-            if (!PatientExists(updatedPatient))
+            var updatedPatient = GetPatientById(patientId);
+
+            if (updatedPatient == null)
             {
                 return false;
             }
-            
-            var existingPatient = GetPatientById(updatedPatient.PatientId);
 
-            existingPatient.FirstName = updatedPatient.FirstName;
-            existingPatient.LastName = updatedPatient.LastName;
+
+            updatedPatient.FirstName = newFirstName;
+            updatedPatient.LastName = newLastName;
+
+            //var existingPatient = GetPatientById(updatedPatient.PatientId);
+
+            //existingPatient.FirstName = updatedPatient.FirstName;
+            //existingPatient.LastName = updatedPatient.LastName;
+
             return true;
 
         }
         public bool RemovePatient(Patient patient)
         {
-            if (!PatientExists(patient))
+            if (patient == null)
             {
                 return false;
             }

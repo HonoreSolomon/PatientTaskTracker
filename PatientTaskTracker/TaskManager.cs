@@ -37,18 +37,21 @@ namespace PatientTaskTracker
 
         public bool EditTask(int taskId, int newPatientID, string newDescription, DateTime newDueDate)
         {
-            var taskToEdit = _taskRepository.GetTaskById(taskId);
+            //var taskToEdit = _taskRepository.GetTaskById(taskId);
 
-            if (taskToEdit == null) {
-                return false;
-            }
+            //if (taskToEdit == null) {
+            //    return false;
+            //}
 
             
-            taskToEdit.PatientId = newPatientID;
-            taskToEdit.Description = newDescription;
-            taskToEdit.DueDate = newDueDate;
+            //taskToEdit.PatientId = newPatientID;
+            //taskToEdit.Description = newDescription;
+            //taskToEdit.DueDate = newDueDate;
 
-            return true;
+
+
+
+            return _taskRepository.UpdateTask(taskId, newPatientID, newDescription, newDueDate);
 
         }
 
