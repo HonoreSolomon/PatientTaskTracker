@@ -1,25 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
 namespace PatientTaskTracker
 {
     public class Patient
     {
-        //PatientID is Primary key
-        [Key]
-        public int PatientId { get; private set; }
+
+        private static int _nextPatientId = 1;
+
+        private int _patientId;
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public List<TaskItem> Tasks { get; set; } = new();
+        public int PatientId
+        {
+            get { return _patientId; }
+            private set { _patientId = value; }
+
+        }
+
 
         public Patient(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+            PatientId = _nextPatientId++;
         }
 
+
+
+
+
+
+
+
     }
-
-    
-
 }
