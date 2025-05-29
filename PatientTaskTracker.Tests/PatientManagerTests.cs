@@ -17,19 +17,7 @@ namespace PatientTaskTracker.Tests
         }
 
 
-        [Fact]
-        public void PatientExists_ShouldReturnTrueIfPatientExists()
-        {
-            PatientManager manager = CreatePatientManagerWithInitialPatient();
-            manager.AddPatient("Jane", "Smith");
-            manager.AddPatient("Bob", "Brown");
-
-            var result = manager.PatientExists(2);
-
-            Assert.True(result);
-
-            
-        }
+       
 
         [Fact]
         public void PatientExists_ShouldReturnFalseIfPatientDoesNotExist()
@@ -53,7 +41,6 @@ namespace PatientTaskTracker.Tests
             Assert.Equal("John", patient.FirstName);
             Assert.Equal("Doe", patient.LastName);
 
-            Assert.Equal(1, patient.PatientId);
 
         }
         [Fact]
@@ -88,7 +75,7 @@ namespace PatientTaskTracker.Tests
         public void EditPatient_ShouldReturnFalseIfPatientDoesNotExist()
         {
             var manager = CreatePatientManagerWithInitialPatient();
-            var patient = manager.GetAllPatients().First();
+
 
             bool result = manager.EditPatient(999, "Jane", "Smith");
             

@@ -13,6 +13,7 @@
         {             
             _patients.Add(patient);
 
+
         }
 
         public IEnumerable<Patient> GetAllPatients()
@@ -26,23 +27,35 @@
             return _patients.Find(patient => patient.PatientId == patientId);
         }
 
-        public bool UpdatePatient(Patient updatedPatient)
+        public bool UpdatePatient(int patientId, string newFirstName, string newLastName)
         {
-            if (!PatientExists(updatedPatient))
+            var updatedPatient = GetPatientById(patientId);
+
+            if (updatedPatient == null)
             {
                 return false;
             }
+<<<<<<< HEAD
+
+=======
             
             var existingPatient = GetPatientById(updatedPatient.PatientId);
+>>>>>>> master
 
-            existingPatient.FirstName = updatedPatient.FirstName;
-            existingPatient.LastName = updatedPatient.LastName;
+            updatedPatient.FirstName = newFirstName;
+            updatedPatient.LastName = newLastName;
+
+            //var existingPatient = GetPatientById(updatedPatient.PatientId);
+
+            //existingPatient.FirstName = updatedPatient.FirstName;
+            //existingPatient.LastName = updatedPatient.LastName;
+
             return true;
 
         }
         public bool RemovePatient(Patient patient)
         {
-            if (!PatientExists(patient))
+            if (patient == null)
             {
                 return false;
             }

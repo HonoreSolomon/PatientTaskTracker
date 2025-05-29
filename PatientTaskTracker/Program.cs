@@ -6,10 +6,35 @@
     {
         public static void Main(string[] args)
         {
+<<<<<<< HEAD
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var configuration = builder.Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseMySql(
+                connectionString,
+                new MySqlServerVersion(new Version(8,4,36))
+            );
+
+
+
+
+            var context = new AppDbContext(optionsBuilder.Options);
+            var dbPatientRepository = new DbPatientRepository(context);
+            var dbTaskItemRepository = new DbTaskItemRepository(context);
+
+
+            PatientManager patientManager = new(dbPatientRepository);
+            TaskManager taskManager = new(dbTaskItemRepository);
+=======
             InMemoryPatientRepository inMemoryPatientRepository = new();
             InMemoryTaskRepository inMemoryTaskRepository = new();
             PatientManager patientManager = new(inMemoryPatientRepository);
             TaskManager taskManager = new(inMemoryTaskRepository);
+>>>>>>> master
 
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
