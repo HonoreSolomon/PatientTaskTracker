@@ -25,13 +25,13 @@ namespace PatientTaskTracker
 
 
 
+            var context = new AppDbContext(optionsBuilder.Options);
+            var dbPatientRepository = new DbPatientRepository(context);
+            var dbTaskItemRepository = new DbTaskItemRepository(context);
 
 
-
-            InMemoryPatientRepository inMemoryPatientRepository = new();
-            InMemoryTaskRepository inMemoryTaskRepository = new();
-            PatientManager patientManager = new(inMemoryPatientRepository);
-            TaskManager taskManager = new(inMemoryTaskRepository);
+            PatientManager patientManager = new(dbPatientRepository);
+            TaskManager taskManager = new(dbTaskItemRepository);
 
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
