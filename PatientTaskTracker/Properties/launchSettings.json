@@ -3,7 +3,7 @@
     "PatientTaskTracker": {
       "commandName": "Project",
       "environmentVariables": {
-        "dbPassword": "PixeYifxLinl5X"
+        "dbPassword": "{dbPassword}"
       }
     }
   }
