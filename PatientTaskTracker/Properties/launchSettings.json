@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PatientTaskTracker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "dbPassword": "PixeYifxLinl5X"
+      }
+    }
+  }
+}
