@@ -2,7 +2,7 @@
 <RunSettings>
     <RunConfiguration>
         <EnvironmentVariables>
-            <TEST_DB_PASSWORD>PixeYifxLinl5X</TEST_DB_PASSWORD>
+            <TEST_DB_PASSWORD>{dbPassword}</TEST_DB_PASSWORD>
         </EnvironmentVariables>
     </RunConfiguration>
 </RunSettings>
