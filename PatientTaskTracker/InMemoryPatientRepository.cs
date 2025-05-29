@@ -8,7 +8,7 @@
         {
             return _patients.Exists(p => p.PatientId == patient.PatientId);
         }
-
+        
         public void AddPatient(Patient patient)
         {             
             _patients.Add(patient);
@@ -20,6 +20,7 @@
         {
             return _patients.AsReadOnly();
         }
+
         public Patient GetPatientById(int patientId)
         {
             // Checking if patient exists in the PatientManager class
@@ -34,7 +35,12 @@
             {
                 return false;
             }
+<<<<<<< HEAD
 
+=======
+            
+            var existingPatient = GetPatientById(updatedPatient.PatientId);
+>>>>>>> master
 
             updatedPatient.FirstName = newFirstName;
             updatedPatient.LastName = newLastName;
