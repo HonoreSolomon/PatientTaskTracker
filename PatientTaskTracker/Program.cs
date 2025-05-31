@@ -1,4 +1,7 @@
-﻿namespace PatientTaskTracker
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace PatientTaskTracker
 
 {
 
@@ -6,7 +9,6 @@
     {
         public static void Main(string[] args)
         {
-<<<<<<< HEAD
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -29,12 +31,6 @@
 
             PatientManager patientManager = new(dbPatientRepository);
             TaskManager taskManager = new(dbTaskItemRepository);
-=======
-            InMemoryPatientRepository inMemoryPatientRepository = new();
-            InMemoryTaskRepository inMemoryTaskRepository = new();
-            PatientManager patientManager = new(inMemoryPatientRepository);
-            TaskManager taskManager = new(inMemoryTaskRepository);
->>>>>>> master
 
             Console.WriteLine("Patient Task Tracker Has been booted. ");
             while (true)
