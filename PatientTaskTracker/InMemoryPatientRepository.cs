@@ -35,12 +35,6 @@
             {
                 return false;
             }
-<<<<<<< HEAD
-
-=======
-            
-            var existingPatient = GetPatientById(updatedPatient.PatientId);
->>>>>>> master
 
             updatedPatient.FirstName = newFirstName;
             updatedPatient.LastName = newLastName;

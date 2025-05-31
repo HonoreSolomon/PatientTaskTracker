@@ -18,12 +18,19 @@ namespace PatientTaskTracker
 
         }
 
+        public List<TaskItem> Tasks { get; set; } = new List<TaskItem>();
+
 
         public Patient(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
             PatientId = _nextPatientId++;
+        }
+
+        public Patient()
+        {
+            // Parameterless constructor for EF Core
         }
 
 
