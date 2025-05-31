@@ -3,7 +3,7 @@
     "PatientTaskTracker.Tests": {
       "commandName": "Project",
       "environmentVariables": {
-        "TEST_DB_PASSWORD": "PixeYifxLinl5X"
+        "TEST_DB_PASSWORD": "{dbPassword}"
       }
     }
   }
