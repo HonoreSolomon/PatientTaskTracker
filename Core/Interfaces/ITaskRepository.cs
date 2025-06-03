@@ -14,6 +14,10 @@ namespace PatientTaskTracker.Core.Interfaces
 
             public IEnumerable<TaskItem> GetTasksByPatientId(int patientId);
 
+
+            
+            
+            
     }
 
 }

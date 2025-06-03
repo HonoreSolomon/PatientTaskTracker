@@ -1,6 +1,6 @@
-﻿using PateintTaskTracker.Infrastructure.Data;
-using PateintTaskTracker.Core.Interfaces;
+﻿using PatientTaskTracker.Infrastructure.Data;
 using PatientTaskTracker.Core.Models;
+using PatientTaskTracker.Core.Interfaces;
 
 
 namespace PateintTaskTracker.Infrastructure.Repositories

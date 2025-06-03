@@ -1,10 +1,11 @@
 ﻿using PatientTaskTracker.Infrastructure.Data;
 using PatientTaskTracker.Core.Interfaces;
 using PatientTaskTracker.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PatientTaskTracker.Infrastructure.Repositories
 {
-    public class DbPatientRepository : IPatientRepository
+    public class DbPatientRepository : IPatientRepository, IPatientRepositoryAsync
     {
         private readonly AppDbContext _context;
         public DbPatientRepository(AppDbContext context)
@@ -46,6 +47,54 @@ namespace PatientTaskTracker.Infrastructure.Repositories
 
             
             return _context.SaveChanges() > 0;
+        }
+
+
+        public async Task AddPatientAsync(Patient patient)
+        {
+            await _context.Patients.AddAsync(patient);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Patient>> GetAllPatientsAsync()
+        {
+            return await _context.Patients.ToListAsync();
+        }
+
+        public async Task<Patient?> GetPatientByIdAsync(int patientId)
+        {
+            return await _context.Patients.FirstOrDefaultAsync(p => p.PatientId == patientId);
+        }
+
+        public async Task<bool> UpdatePatientAsync(int patientId, string newFirstName, string newLastName)
+        {
+            var patientToUpdate = await GetPatientByIdAsync(patientId);
+            if (patientToUpdate == null)
+            {
+                return false;
+            }
+
+            patientToUpdate.FirstName = newFirstName;
+            patientToUpdate.LastName = newLastName;
+
+            return await _context.SaveChangesAsync() > 0;
+
+
+
+        }
+
+        public async Task<bool> RemovePatientAsync(Patient patient)
+        {
+            if (!await _context.Patients.AnyAsync(p => p.PatientId == patient.PatientId))
+            {
+                return false;
+            }
+
+            _context.Patients.Remove(patient);
+
+            
+
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
