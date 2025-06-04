@@ -45,5 +45,10 @@ namespace PatientTaskTracker.Core.Managers
 
             return await _patientRepositoryAsync.RemovePatientAsync(patientToRemove);
         }
+
+        public async Task<Patient?> GetPatientByIdAsync(int id)
+        {
+            return await _patientRepositoryAsync.GetPatientByIdAsync(id);
+        }
     }
 }

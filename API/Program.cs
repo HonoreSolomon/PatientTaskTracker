@@ -14,15 +14,28 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
-builder.Services.AddScoped<IPatientRepository, DbPatientRepository>();
-builder.Services.AddScoped<ITaskRepository, DbTaskItemRepository>();
+builder.Services.AddScoped<IPatientRepositoryAsync, DbPatientRepository>();
+builder.Services.AddScoped<ITaskRepositoryAsync, DbTaskItemRepository>();
 
-builder.Services.AddScoped<PatientManager>();
-builder.Services.AddScoped<TaskManager>();
+builder.Services.AddScoped<PatientManagerAsync>();
+builder.Services.AddScoped<TaskManagerAsync>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+
+});
+
+
 
 var app = builder.Build();
 
@@ -35,6 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("ReactPolicy");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
