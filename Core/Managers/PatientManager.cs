@@ -14,6 +14,7 @@ namespace PatientTaskTracker.Core.Managers
             _patientRepository = patientRepository;
         }
 
+
         public bool PatientExists(int patientId)
         {
             if(_patientRepository.GetPatientById(patientId) == null)
