@@ -12,6 +12,7 @@ namespace PatientTaskTracker.Infrastructure.Data
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory()) // Ensure System.IO is imported
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddUserSecrets<AppDbContextFactory>()
                 .Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
