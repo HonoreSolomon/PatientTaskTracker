@@ -14,13 +14,8 @@ namespace PatientTaskTracker.Core.Managers
 
         public async Task AddTaskAsync(int patientId, string newDescription, DateTime newDueDate)
         {
-            var task = new TaskItem
-            {
-                PatientId = patientId,
-                Description = newDescription,
-                DueDate = newDueDate
-            };
-
+            var task = new TaskItem(patientId, newDescription, newDueDate);
+            
             await _taskRepositoryAsync.AddTaskAsync(task);
         }
 
