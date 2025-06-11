@@ -1,23 +1,17 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace PatientTaskTracker.Core.Models
 {
     public class Patient
     {
 
-        private static int _nextPatientId = 1;
 
-        private int _patientId;
+        [Key]
+        public int PatientId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public int PatientId
-        {
-            get { return _patientId; }
-            private set { _patientId = value; }
-
-        }
-
         public List<TaskItem> Tasks { get; set; } = new List<TaskItem>();
 
 
@@ -25,7 +19,6 @@ namespace PatientTaskTracker.Core.Models
         {
             FirstName = firstName;
             LastName = lastName;
-            PatientId = _nextPatientId++;
         }
 
         public Patient()

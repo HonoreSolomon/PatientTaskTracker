@@ -58,12 +58,16 @@ namespace PatientTaskTracker.Infrastructure.Repositories
 
         public async Task<IEnumerable<Patient>> GetAllPatientsAsync()
         {
-            return await _context.Patients.ToListAsync();
+            return await _context.Patients
+                .Include(p => p.Tasks)
+                .ToListAsync();
         }
 
         public async Task<Patient?> GetPatientByIdAsync(int patientId)
         {
-            return await _context.Patients.FirstOrDefaultAsync(p => p.PatientId == patientId);
+            return await _context.Patients
+                .Include(p => p.Tasks)
+                .FirstOrDefaultAsync(p => p.PatientId == patientId);
         }
 
         public async Task<bool> UpdatePatientAsync(int patientId, string newFirstName, string newLastName)

@@ -18,7 +18,7 @@ namespace PatientTaskTracker
         public DateTime Created { get; private set; }
 
         public bool IsCompleted { get; set; } = false;
-        public Patient patient { get; set; }
+        public Patient Patient { get; set; }
 
         public TaskItem(int patientId, string description, DateTime dueDate)
         {

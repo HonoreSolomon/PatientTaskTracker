@@ -11,7 +11,7 @@ namespace PatientTaskTracker
             builder.Property(p => p.FirstName).IsRequired().HasMaxLength(50);
             builder.Property(p => p.LastName).IsRequired().HasMaxLength(50);
             builder.HasMany(p => p.Tasks)
-                .WithOne(t => t.patient)
+                .WithOne(t => t.Patient)
                 .HasForeignKey(t => t.PatientId);
 
         }
