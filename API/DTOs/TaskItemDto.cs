@@ -13,13 +13,13 @@ namespace PatientTaskTracker.API.DTOs
     public record CreateTaskItemDto(
         [Required] int PatientId,
         [Required][StringLength(500)] string Description,
-        [Required] DateTime Duedate
+        [Required] DateTime DueDate
     );
 
     public record UpdateTaskItemDto(
         [Required] int PatientId,
         [Required][StringLength(500)] string Description,
-        [Required] DateTime Duedate,
+        [Required] DateTime DueDate,
         [Required] bool IsCompleted
     );
 

@@ -1,3 +1,4 @@
+using API.Mapping;
 using Microsoft.EntityFrameworkCore;
 using PateintTaskTracker.Infrastructure.Repositories;
 using PatientTaskTracker.Core.Interfaces;
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IPatientRepositoryAsync, DbPatientRepository>();
 builder.Services.AddScoped<ITaskRepositoryAsync, DbTaskItemRepository>();
 

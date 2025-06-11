@@ -80,32 +80,7 @@ namespace PatientTaskTracker.API.Controllers
             }
         }
 
-        [HttpGet("{patientId}")]
-        public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetTasksByPatientId(int patientId)
-        {
-            try
-            {
-                var taskItems = await _taskItemManager.GetTasksByPatientIdAsync(patientId);
-                if (taskItems == null || !taskItems.Any())
-                {
-                    return NotFound($"No task items found for patient with ID {patientId}.");
-                }
-
-                var taskItemDtos = taskItems.Select(t => new TaskItemDto(
-                    t.TaskId,
-                    t.PatientId,
-                    t.Description,
-                    t.DueDate,
-                    t.IsCompleted
-                ));
-
-                return Ok(taskItemDtos);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An error occurred while retrieving task items: " + ex.Message);
-            }
-        }
+        
 
         [HttpPost]
         public async Task<ActionResult<TaskItemDto>> CreateTaskItem([FromBody] CreateTaskItemDto createTaskItemDto)
@@ -118,7 +93,7 @@ namespace PatientTaskTracker.API.Controllers
             try
             {
                 await _taskItemManager.AddTaskAsync(createTaskItemDto.PatientId, createTaskItemDto.Description,
-                    createTaskItemDto.Duedate);
+                    createTaskItemDto.DueDate);
 
                 return Ok(new { message = "TaskItem created successfully" });
 
@@ -126,7 +101,7 @@ namespace PatientTaskTracker.API.Controllers
 
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while creating the task item: " + ex.Message);
+                return StatusCode(500, "An error occurred while creating the task item: " + ex.Message + ex.InnerException?.Message);
             }
 
 
@@ -149,7 +124,7 @@ namespace PatientTaskTracker.API.Controllers
                 }
 
                 var success = await _taskItemManager.UpdateTaskAsync(id, updateTaskItemDto.PatientId,
-                    updateTaskItemDto.Description, updateTaskItemDto.Duedate);
+                    updateTaskItemDto.Description, updateTaskItemDto.DueDate);
 
                 if (!success)
                 {
@@ -160,10 +135,10 @@ namespace PatientTaskTracker.API.Controllers
 
             }
 
-            catch (Exception e)
+            catch (Exception ex)
 
             {
-                return StatusCode(500, "An error occurred while updating the task item: " + e.Message);
+                return StatusCode(500, "An error occurred while updating the task item: " + ex.Message + ex.InnerException?.Message);
             }
         }
 
